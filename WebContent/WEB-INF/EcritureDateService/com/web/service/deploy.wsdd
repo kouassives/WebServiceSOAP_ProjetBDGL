@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EcritureDateService WSDL service -->
+
+  <service name="EcritureDate" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.web.com"/>
+      <parameter name="wsdlServiceElement" value="EcritureDateService"/>
+      <parameter name="schemaQualified" value="http://service.web.com"/>
+      <parameter name="wsdlServicePort" value="EcritureDate"/>
+      <parameter name="className" value="com.web.service.EcritureDate"/>
+      <parameter name="wsdlPortType" value="EcritureDate"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.web.com" xmlns:retNS="http://service.web.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="ecriture" qname="operNS:ecriture" returnQName="retNS:ecritureReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.web.com" xmlns:retNS="http://service.web.com" xmlns:rtns="http://service.web.com" name="lecture" qname="operNS:lecture" returnQName="retNS:lectureReturn" returnType="rtns:Parametres" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="lecture ecriture"/>
+
+      <typeMapping xmlns:ns="http://service.web.com" qname="ns:Parametres" type="java:com.web.service.Parametres" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
